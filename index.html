@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeFlow Blood Bank – Availability &amp; Donor Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <h1>LifeFlow Blood Bank</h1>
+  <p class="tagline">Donate blood – save lives.</p>
+</header>
+
+<!-- ================= NAVIGATION ================= -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="nav-container">
+    <a class="brand" href="#home">🩸 LifeFlow</a>
+
+    <button class="nav-toggle" id="navToggle" type="button"
+            aria-expanded="false" aria-controls="navMenu" aria-label="Toggle menu">&#9776;</button>
+
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#availability">Blood Availability</a></li>
+      <li><a href="#live">Live Stock</a></li>
+      <li><a href="#eligibility">Eligibility</a></li>
+      <li><a href="#guidelines">Donation Guidelines</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#media">Gallery &amp; Video</a></li>
+      <li><a href="#location">Find Us</a></li>
+      <li><a href="#donors">Donors</a></li>
+      <li><a href="#tasks">Staff Tasks</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <a class="nav-cta" href="#register">Donor Registration</a>
+  </div>
+</nav>
+
+<!-- Emergency alert banner (controlled by a toggle switch) -->
+<div id="alertBanner" class="alert-banner hidden" role="alert">
+  <span class="alert-icon" aria-hidden="true">&#9888;</span>
+  <p id="alertText"></p>
+  <a class="alert-link" href="#register">Donate now</a>
+</div>
+
+<main>
+
+  <!-- ================= HOME ================= -->
+  <section id="home">
+    <h2>Welcome</h2>
+    <figure>
+      <img alt="Banner showing a red heart with a blood drop and the words 'Be a Hero – Donate Blood'"
+           src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200'><rect width='800' height='200' fill='%23ffebee'/><path d='M130 170 C40 110 60 40 130 75 C200 40 220 110 130 170Z' fill='%23e53935'/><text x='260' y='95' font-size='44' font-weight='bold' fill='%23b71c1c' font-family='Arial'>Be a Hero</text><text x='260' y='145' font-size='34' fill='%23555' font-family='Arial'>Donate Blood, Save Lives</text></svg>"
+           width="800" height="200">
+      <figcaption>Every blood donation can save up to three lives.</figcaption>
+    </figure>
+    <p>LifeFlow Blood Bank collects, tests, stores and supplies safe blood to hospitals and patients in need. One donation can save up to <strong>three lives</strong>.</p>
+    <p>Use this page to check the current stock of each blood group, find out whether you can donate, and register as a donor.</p>
+    <div class="cta">
+      <a class="btn" href="#register">Register as Donor</a>
+      <a class="btn btn-outline" href="#availability">Check Availability</a>
+    </div>
+  </section>
+
+  <!-- ================= PAGE SETTINGS (TOGGLE SWITCHES) ================= -->
+  <section id="settings">
+    <h2>Page Settings</h2>
+    <p>Turn features on or off with the switches. Your choices are saved in this browser and restored the next time you visit.</p>
+
+    <div class="settings-list">
+      <div class="setting-row" data-setting="alert">
+        <div class="setting-text">
+          <p class="setting-title">Emergency Alert Banner</p>
+          <p class="setting-desc">Show a red banner at the top whenever a blood group is critically low (5 units or fewer).</p>
+        </div>
+        <label class="switch" for="setAlert">
+          <input type="checkbox" class="switch-input" id="setAlert" role="switch">
+          <span class="switch-state" id="setAlertState">Off</span>
+        </label>
+      </div>
+      <div class="setting-row" data-setting="reminders">
+        <div class="setting-text">
+          <p class="setting-title">Donation Reminders</p>
+          <p class="setting-desc">Tick &ldquo;Send me reminders and urgent blood-need alerts&rdquo; automatically on the donor registration form.</p>
+        </div>
+        <label class="switch" for="setReminders">
+          <input type="checkbox" class="switch-input" id="setReminders" role="switch">
+          <span class="switch-state" id="setRemindersState">Off</span>
+        </label>
+      </div>
+      <div class="setting-row" data-setting="dark">
+        <div class="setting-text">
+          <p class="setting-title">Dark Mode</p>
+          <p class="setting-desc">Use a dark colour theme that is easier on the eyes in low light.</p>
+        </div>
+        <label class="switch" for="setDark">
+          <input type="checkbox" class="switch-input" id="setDark" role="switch">
+          <span class="switch-state" id="setDarkState">Off</span>
+        </label>
+      </div>
+      <div class="setting-row" data-setting="large">
+        <div class="setting-text">
+          <p class="setting-title">Large Text</p>
+          <p class="setting-desc">Increase the text size across the whole page for easier reading.</p>
+        </div>
+        <label class="switch" for="setLarge">
+          <input type="checkbox" class="switch-input" id="setLarge" role="switch">
+          <span class="switch-state" id="setLargeState">Off</span>
+        </label>
+      </div>
+      <div class="setting-row" data-setting="calm">
+        <div class="setting-text">
+          <p class="setting-title">Reduce Animations</p>
+          <p class="setting-desc">Turn off pulsing, sliding and hover animations.</p>
+        </div>
+        <label class="switch" for="setMotion">
+          <input type="checkbox" class="switch-input" id="setMotion" role="switch">
+          <span class="switch-state" id="setMotionState">Off</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="settings-footer">
+      <p id="settingsCount" class="hint"></p>
+      <button type="button" id="settingsReset" class="btn-outline">Reset to defaults</button>
+    </div>
+  </section>
+
+  <!-- ================= AVAILABILITY TABLE ================= -->
+  <section id="availability">
+    <h2>Blood Group Availability</h2>
+    <p>Stock status as of <time id="stockTime" datetime="2026-11-21">21 November 2026</time>.</p>
+    <table>
+      <caption><strong>Current blood stock (units)</strong></caption>
+      <thead>
+        <tr>
+          <th scope="col">Blood Group</th>
+          <th scope="col">Units Available</th>
+          <th scope="col">Status</th>
+          <th scope="col">Can Donate To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>A+</td>  <td>45</td> <td class="high">Adequate</td>  <td>A+, AB+</td></tr>
+        <tr><td>A−</td>  <td>12</td> <td class="low">Low</td>       <td>A+, A−, AB+, AB−</td></tr>
+        <tr><td>B+</td>  <td>38</td> <td class="high">Adequate</td>  <td>B+, AB+</td></tr>
+        <tr><td>B−</td>  <td>8</td>  <td class="low">Low</td>       <td>B+, B−, AB+, AB−</td></tr>
+        <tr><td>AB+</td> <td>20</td> <td class="high">Adequate</td>  <td>AB+</td></tr>
+        <tr><td>AB−</td> <td>4</td>  <td class="critical">Critical</td> <td>AB+, AB−</td></tr>
+        <tr><td>O+</td>  <td>60</td> <td class="high">Adequate</td>  <td>All positive groups</td></tr>
+        <tr><td>O−</td>  <td>5</td>  <td class="critical">Critical</td> <td>All blood groups</td></tr>
+      </tbody>
+    </table>
+    <p><small>O− is the universal donor; AB+ is the universal recipient.</small></p>
+
+    <!-- Dynamic stock manager (DOM manipulation) -->
+    <div class="stock-manager">
+      <h3>Update Stock (Blood Bank Staff)</h3>
+      <div class="stock-controls">
+        <div class="field">
+          <label for="stockGroup">Blood Group</label>
+          <select id="stockGroup"></select>
+        </div>
+        <div class="field">
+          <label for="stockUnits">Units</label>
+          <input type="number" id="stockUnits" min="1" max="500" value="1">
+        </div>
+        <div class="stock-buttons">
+          <button type="button" id="stockAdd">+ Add Units</button>
+          <button type="button" id="stockIssue" class="btn-dark">&minus; Issue Units</button>
+          <button type="button" id="stockSet" class="btn-outline">Set Exact</button>
+        </div>
+      </div>
+      <p class="hint">The table above updates instantly and the status changes automatically
+        (5 or fewer = Critical, 6–15 = Low, above 15 = Adequate). No page reload needed.</p>
+    </div>
+  </section>
+
+  <!-- ================= LIVE STOCK (API / FETCH) ================= -->
+  <section id="live">
+    <h2>Live Stock Feed (API)</h2>
+    <p>This section fetches blood stock and donation-camp data as JSON from the blood bank's
+       endpoint (<code>blood-stock.json</code>) and builds the tables in the browser.</p>
+
+    <div class="api-toolbar">
+      <p id="apiStatus" class="api-status">Waiting for data…</p>
+      <div class="api-controls">
+        <label for="apiFilter" class="inline">Show:</label>
+        <select id="apiFilter" aria-label="Filter by status">
+          <option value="all">All groups</option>
+          <option value="critical">Critical only</option>
+          <option value="low">Low only</option>
+          <option value="high">Adequate only</option>
+        </select>
+        <button type="button" id="apiRefresh">&#8635; Refresh</button>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="apiLoading" class="loader" role="status" hidden>
+      <span class="spinner"></span> <span>Loading data from the server…</span>
+    </div>
+
+    <!-- Error box -->
+    <div id="apiError" class="error-box" role="alert" hidden>
+      <p id="apiErrorText"></p>
+      <button type="button" id="apiRetry" class="btn-dark">Try Again</button>
+    </div>
+
+    <!-- Summary cards (filled by JavaScript) -->
+    <div id="apiSummary" class="summary"></div>
+
+    <h3>Blood Stock</h3>
+    <div class="table-wrap">
+      <table id="apiStockTable">
+        <caption>Blood stock received from the API</caption>
+        <thead>
+          <tr>
+            <th scope="col">Blood Group</th>
+            <th scope="col">Units</th>
+            <th scope="col">Stock Level</th>
+            <th scope="col">Status</th>
+            <th scope="col">Can Donate To</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <h3>Upcoming Donation Camps</h3>
+    <div class="table-wrap">
+      <table id="apiCampTable">
+        <caption>Camps received from the API</caption>
+        <thead>
+          <tr>
+            <th scope="col">Venue</th>
+            <th scope="col">City</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Slots Left</th>
+            <th scope="col">Book</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= ELIGIBILITY ================= -->
+  <section id="eligibility">
+    <h2>Donor Eligibility</h2>
+    <article>
+      <h3>You can donate if you:</h3>
+      <ul>
+        <li>Are between <strong>18 and 65 years</strong> of age</li>
+        <li>Weigh at least <strong>50 kg</strong></li>
+        <li>Have a haemoglobin level of at least <strong>12.5 g/dL</strong></li>
+        <li>Are in good general health on the day of donation</li>
+        <li>Last donated at least <strong>3 months</strong> ago (men) or <strong>4 months</strong> ago (women)</li>
+      </ul>
+    </article>
+    <article>
+      <h3>You should not donate if you:</h3>
+      <ul>
+        <li>Have a fever, cold, or infection</li>
+        <li>Have had a tattoo or piercing in the last 6 months</li>
+        <li>Are pregnant or breastfeeding</li>
+        <li>Have had major surgery in the last 6 months</li>
+        <li>Have HIV, hepatitis B/C, or certain heart conditions</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ================= GUIDELINES ================= -->
+  <section id="guidelines">
+    <h2>Donation Guidelines</h2>
+    <div class="grid">
+      <article>
+        <h3>Before donating</h3>
+        <ul>
+          <li>Eat a healthy meal and drink plenty of water</li>
+          <li>Get a good night's sleep</li>
+          <li>Carry a valid photo ID</li>
+          <li>Avoid alcohol for 24 hours</li>
+        </ul>
+      </article>
+      <article>
+        <h3>After donating</h3>
+        <ul>
+          <li>Rest for 10–15 minutes and have a snack</li>
+          <li>Drink extra fluids for the next 24 hours</li>
+          <li>Avoid heavy exercise for the rest of the day</li>
+          <li>Keep the bandage on for several hours</li>
+        </ul>
+      </article>
+    </div>
+    <h3>The donation process</h3>
+    <ol>
+      <li>Registration and ID check</li>
+      <li>Health screening (pulse, blood pressure, haemoglobin)</li>
+      <li>Donation – takes about 8–10 minutes</li>
+      <li>Rest and refreshments</li>
+    </ol>
+  </section>
+
+  <!-- ================= INTERACTIVE TOOLS ================= -->
+  <section id="tools">
+    <h2>Interactive Tools</h2>
+    <p>Check which blood groups match, see whether you can donate, get quick answers and browse the photo gallery.</p>
+
+    <!-- Tab navigation -->
+    <div class="tabs" role="tablist" aria-label="Blood bank tools">
+      <button type="button" class="tab-btn active" role="tab" id="tab-compat" data-tab="compat" aria-selected="true" aria-controls="panel-compat">Compatibility</button>
+      <button type="button" class="tab-btn" role="tab" id="tab-check" data-tab="check" aria-selected="false" tabindex="-1" aria-controls="panel-check">Eligibility Check</button>
+      <button type="button" class="tab-btn" role="tab" id="tab-faq" data-tab="faq" aria-selected="false" tabindex="-1" aria-controls="panel-faq">FAQ</button>
+      <button type="button" class="tab-btn" role="tab" id="tab-gallery" data-tab="gallery" aria-selected="false" tabindex="-1" aria-controls="panel-gallery">Gallery</button>
+    </div>
+
+    <!-- TAB 1: Blood group compatibility (comparison tool) -->
+    <div class="tab-panel active" id="panel-compat" role="tabpanel" aria-labelledby="tab-compat">
+      <h3>Select a blood group</h3>
+      <div id="groupButtons" class="group-buttons"></div>
+      <div id="compatResult" class="compat-result">
+        <p class="empty">Choose a blood group above to see who it can donate to and receive from.</p>
+      </div>
+      <p class="hint">Chip colors show today&rsquo;s stock:
+        <span class="chip st-high">Adequate</span>
+        <span class="chip st-low">Low</span>
+        <span class="chip st-critical">Critical</span></p>
+
+      <h3>Quick check: can one group donate to another?</h3>
+      <div class="pair-check">
+        <select id="pairDonor" aria-label="Donor blood group"></select>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+        <select id="pairRecipient" aria-label="Recipient blood group"></select>
+        <button type="button" id="pairBtn">Check</button>
+      </div>
+      <p id="pairResult" class="pair-result" role="status"></p>
+    </div>
+
+    <!-- TAB 2: Eligibility calculator -->
+    <div class="tab-panel" id="panel-check" role="tabpanel" aria-labelledby="tab-check">
+      <h3>Can I donate blood?</h3>
+      <form id="ecForm" class="ec-form">
+        <div class="task-grid">
+          <div class="field">
+            <label for="ecAge">Age</label>
+            <input type="number" id="ecAge" min="1" max="100" required placeholder="e.g. 25">
+          </div>
+          <div class="field">
+            <label for="ecWeight">Weight (kg)</label>
+            <input type="number" id="ecWeight" min="20" max="250" step="0.1" required placeholder="e.g. 62">
+          </div>
+          <div class="field">
+            <label for="ecHb">Haemoglobin (g/dL)</label>
+            <input type="number" id="ecHb" min="5" max="22" step="0.1" placeholder="Optional">
+          </div>
+          <div class="field">
+            <label for="ecGender">Gender</label>
+            <select id="ecGender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="ecLast">Last donation date</label>
+            <input type="date" id="ecLast">
+          </div>
+        </div>
+        <p class="ec-label">Do any of these apply right now?</p>
+        <div class="ec-checks-input">
+          <input type="checkbox" id="ecFever"><label for="ecFever" class="inline">Fever, cold or infection</label>
+          <input type="checkbox" id="ecTattoo"><label for="ecTattoo" class="inline">Tattoo / piercing in last 6 months</label>
+          <input type="checkbox" id="ecSurgery"><label for="ecSurgery" class="inline">Major surgery in last 6 months</label>
+          <input type="checkbox" id="ecPregnant"><label for="ecPregnant" class="inline">Pregnant or breastfeeding</label>
+        </div>
+        <div class="buttons"><button type="submit">Check Eligibility</button></div>
+      </form>
+
+      <div id="ecResult" class="ec-result" hidden>
+        <h4 id="ecVerdict"></h4>
+        <ul id="ecChecks"></ul>
+        <p id="ecNext"></p>
+        <p class="hint">This is only a guide. The final decision is made by our medical staff on the day of donation.</p>
+      </div>
+    </div>
+
+    <!-- TAB 3: FAQ accordion with search -->
+    <div class="tab-panel" id="panel-faq" role="tabpanel" aria-labelledby="tab-faq">
+      <h3>Frequently asked questions</h3>
+      <div class="donor-tools">
+        <input type="search" id="faqSearch" placeholder="Search questions (e.g. safe, weak, medicine)" aria-label="Search FAQ">
+        <button type="button" id="faqExpand" class="btn-outline">Expand all</button>
+        <button type="button" id="faqCollapse" class="btn-outline">Collapse all</button>
+      </div>
+      <div class="faq-options">
+        <input type="checkbox" id="faqSingle"><label for="faqSingle" class="inline">Keep only one answer open at a time</label>
+      </div>
+
+      <div id="faqList" class="faq-list">
+        <details>
+          <summary>How long does a blood donation take?</summary>
+          <p>The whole visit takes about 45&ndash;60 minutes including registration, screening and rest. The donation itself takes only 8&ndash;10 minutes.</p>
+        </details>
+        <details>
+          <summary>Is donating blood safe?</summary>
+          <p>Yes. Every donor gets a fresh, sterile, single-use needle and kit, so you cannot catch any infection by donating.</p>
+        </details>
+        <details>
+          <summary>How much blood is taken?</summary>
+          <p>One standard unit is collected, about 350&ndash;450 ml. Your body replaces the fluid within 24 hours and the red cells within a few weeks.</p>
+        </details>
+        <details>
+          <summary>How often can I donate?</summary>
+          <p>Men can donate every 3 months and women every 4 months.</p>
+        </details>
+        <details>
+          <summary>Will I feel weak afterwards?</summary>
+          <p>Most people feel fine. Rest for 10&ndash;15 minutes, have a snack, drink extra fluids and avoid heavy exercise for the rest of the day.</p>
+        </details>
+        <details>
+          <summary>Can I donate if I take medicine?</summary>
+          <p>Many common medicines are fine, but some may delay your donation. Tell the screening staff about every medicine you take and they will advise you.</p>
+        </details>
+        <details>
+          <summary>Which blood group is the universal donor?</summary>
+          <p>O&minus; can be given to patients of any blood group, so it is always in high demand. AB+ is the universal recipient.</p>
+        </details>
+      </div>
+      <p id="faqEmpty" class="empty" hidden>No questions match your search.</p>
+    </div>
+
+    <!-- TAB 4: Gallery with filter + lightbox -->
+    <div class="tab-panel" id="panel-gallery" role="tabpanel" aria-labelledby="tab-gallery">
+      <h3>Photo gallery</h3>
+      <div class="filter-bar" id="galleryFilters">
+        <button type="button" class="filter-btn active" data-cat="all">All</button>
+        <button type="button" class="filter-btn" data-cat="groups">Blood Groups</button>
+        <button type="button" class="filter-btn" data-cat="process">Donation Process</button>
+        <button type="button" class="filter-btn" data-cat="awareness">Awareness</button>
+      </div>
+      <ul id="galleryGrid" class="gallery-grid"></ul>
+      <p class="hint">Click any picture to enlarge it. Use the arrow keys to move between pictures and Esc to close.</p>
+    </div>
+  </section>
+
+  <!-- ================= MULTIMEDIA: IMAGES, AUDIO, VIDEO ================= -->
+  <section id="media">
+    <h2>Gallery, Audio &amp; Video</h2>
+
+    <h3>Photo Gallery</h3>
+    <div class="grid">
+      <figure>
+        <img alt="Illustration of a red blood collection bag labelled O positive"
+             src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' fill='%23ffebee'/><rect x='60' y='40' width='80' height='120' rx='15' fill='%23c62828'/><rect x='85' y='20' width='30' height='25' fill='%23888'/><text x='100' y='110' font-size='28' text-anchor='middle' fill='white' font-family='Arial'>O+</text></svg>"
+             width="200" height="200">
+        <figcaption>Fig 1: Blood collection bag</figcaption>
+      </figure>
+      <figure>
+        <img alt="Illustration of a heart with a blood drop symbolising the gift of life"
+             src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' fill='%23ffebee'/><path d='M100 170 C20 110 40 40 100 75 C160 40 180 110 100 170Z' fill='%23e53935'/></svg>"
+             width="200" height="200">
+        <figcaption>Fig 2: Every donation gives life</figcaption>
+      </figure>
+      <figure>
+        <img alt="Illustration of a blood drop with a medical cross representing a safe, tested blood supply"
+             src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' fill='%23ffebee'/><path d='M100 20 C100 20 40 90 40 130 a60 60 0 0 0 120 0 C160 90 100 20 100 20Z' fill='%23c62828'/><path d='M100 90v70M65 125h70' stroke='white' stroke-width='14'/></svg>"
+             width="200" height="200">
+        <figcaption>Fig 3: Safe, tested blood</figcaption>
+      </figure>
+    </div>
+
+    <h3>Audio: Donor Awareness Message</h3>
+    <figure>
+      <!-- Place your own audio files in the same folder as this HTML file -->
+      <audio controls preload="none">
+        <source src="donor-awareness.mp3" type="audio/mpeg">
+        <source src="donor-awareness.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+      </audio>
+      <figcaption>Listen: a short message on why regular blood donation matters.
+        (<a href="donor-awareness.mp3" download>Download audio</a>)</figcaption>
+    </figure>
+
+    <h3>Video: Why Donate Blood?</h3>
+    <figure>
+      <video controls width="640" preload="metadata">
+        <!-- Put your video file in the same folder as index.html and name it blood-donation.mp4 -->
+        <source src="blood-donation.mp4" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+      <figcaption>Watch how a blood donation works, step by step, and how it helps patients.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= IFRAME: EMBEDDED CONTENT ================= -->
+  <section id="location">
+    <h2>Find Us &amp; Learn More</h2>
+
+    <h3>Our Location</h3>
+    <figure>
+      <iframe title="Map showing the location of LifeFlow Blood Bank in Coimbatore"
+              src="https://www.google.com/maps?q=Coimbatore,Tamil+Nadu&amp;output=embed"
+              width="100%" height="320" style="border:0;" loading="lazy" allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <figcaption>Map: LifeFlow Blood Bank, 12 Hospital Road, Coimbatore.</figcaption>
+    </figure>
+
+    <h3>Learn More: WHO Blood Safety</h3>
+    <figure>
+      <iframe title="World Health Organization – Blood transfusion and safety"
+              src="https://www.who.int/health-topics/blood-transfusion"
+              width="100%" height="320" loading="lazy"></iframe>
+      <figcaption>Embedded page from the World Health Organization.
+        If it does not display,
+        <a href="https://www.who.int/health-topics/blood-transfusion" target="_blank" rel="noopener">open it in a new tab</a>.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= DONOR REGISTRATION FORM ================= -->
+  <section id="register">
+    <h2>Donor Registration</h2>
+    <p>Fields marked <span class="req">*</span> are required.</p>
+
+    <form id="donorForm" action="#" method="post" enctype="multipart/form-data">
+
+      <!-- ---- Personal details ---- -->
+      <fieldset>
+        <legend>Personal Details</legend>
+
+        <label for="name">Full Name <span class="req">*</span></label>
+        <input type="text" id="name" name="name" placeholder="e.g. Shiva Kumar"
+               required minlength="3" maxlength="50" pattern="[A-Za-z .]+"
+               title="Letters, spaces and dots only (3–50 characters)">
+
+        <label for="age">Age <span class="req">*</span></label>
+        <input type="number" id="age" name="age" min="18" max="65" step="1"
+               placeholder="18 – 65" required>
+
+        <label for="dob">Date of Birth <span class="req">*</span></label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label>Gender <span class="req">*</span></label>
+        <div>
+          <input type="radio" id="male" name="gender" value="male" required>
+          <label for="male" class="inline">Male</label>
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female" class="inline">Female</label>
+          <input type="radio" id="other" name="gender" value="other">
+          <label for="other" class="inline">Other</label>
+        </div>
+      </fieldset>
+
+      <!-- ---- Medical details ---- -->
+      <fieldset>
+        <legend>Medical Details</legend>
+
+        <label for="bg">Blood Group <span class="req">*</span></label>
+        <select id="bg" name="bloodgroup" required>
+          <option value="">-- Select --</option>
+          <option>A+</option><option>A−</option>
+          <option>B+</option><option>B−</option>
+          <option>AB+</option><option>AB−</option>
+          <option>O+</option><option>O−</option>
+        </select>
+
+        <label for="weight">Weight (kg) <span class="req">*</span></label>
+        <input type="number" id="weight" name="weight" min="50" max="200" step="0.1"
+               placeholder="Minimum 50 kg" required>
+
+        <label for="hb">Haemoglobin (g/dL)</label>
+        <input type="number" id="hb" name="haemoglobin" min="12.5" max="20" step="0.1"
+               placeholder="Minimum 12.5 (if known)">
+
+        <label for="lastdonation">Last Donation Date</label>
+        <input type="date" id="lastdonation" name="lastdonation">
+        <p class="hint">Leave blank if this is your first donation.</p>
+
+        <label>Do any of these apply to you? <small>(tick all that apply)</small></label>
+        <div>
+          <input type="checkbox" id="c1" name="conditions" value="diabetes">
+          <label for="c1" class="inline">Diabetes</label>
+          <input type="checkbox" id="c2" name="conditions" value="bp">
+          <label for="c2" class="inline">High / low blood pressure</label>
+          <input type="checkbox" id="c3" name="conditions" value="surgery">
+          <label for="c3" class="inline">Surgery in last 6 months</label>
+          <input type="checkbox" id="c4" name="conditions" value="tattoo">
+          <label for="c4" class="inline">Tattoo / piercing in last 6 months</label>
+          <input type="checkbox" id="c5" name="conditions" value="none">
+          <label for="c5" class="inline">None of the above</label>
+        </div>
+
+        <label for="notes">Additional Medical Notes</label>
+        <textarea id="notes" name="notes" rows="4" maxlength="300"
+                  placeholder="Medicines, allergies or anything else we should know (max 300 characters)"></textarea>
+      </fieldset>
+
+      <!-- ---- Contact details ---- -->
+      <fieldset>
+        <legend>Contact Details</legend>
+
+        <label for="phone">Phone Number <span class="req">*</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number"
+               pattern="[6-9][0-9]{9}" maxlength="10" required
+               title="Enter a valid 10-digit Indian mobile number">
+
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="3" placeholder="Street, area, city"></textarea>
+      </fieldset>
+
+      <!-- ---- Account & appointment ---- -->
+      <fieldset>
+        <legend>Account &amp; Appointment</legend>
+
+        <label for="password">Create Password <span class="req">*</span></label>
+        <input type="password" id="password" name="password" required minlength="8"
+               pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,}" placeholder="At least 8 characters"
+               title="At least 8 characters, with letters and numbers">
+        <p class="hint">Minimum 8 characters, including letters and numbers.</p>
+
+        <label for="confirm">Confirm Password <span class="req">*</span></label>
+        <input type="password" id="confirm" name="confirm" required minlength="8"
+               placeholder="Re-enter password">
+
+        <label for="date">Preferred Donation Date <span class="req">*</span></label>
+        <input type="date" id="date" name="donationdate" required>
+
+        <label for="idproof">Upload Photo ID <span class="req">*</span></label>
+        <input type="file" id="idproof" name="idproof" accept=".jpg,.jpeg,.png,.pdf" required>
+        <p class="hint">Accepted formats: JPG, PNG or PDF.</p>
+      </fieldset>
+
+      <!-- ---- Consent ---- -->
+      <fieldset>
+        <legend>Consent</legend>
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent" class="inline">I confirm that the information given is correct and I voluntarily agree to donate blood. <span class="req">*</span></label>
+        <br>
+        <input type="checkbox" id="updates" name="updates" value="yes">
+        <label for="updates" class="inline">Send me reminders and urgent blood-need alerts.</label>
+      </fieldset>
+
+      <div class="buttons">
+        <button type="submit">Register</button>
+        <button type="reset">Reset</button>
+      </div>
+      <p id="msg" role="status"></p>
+    </form>
+  </section>
+
+  <!-- ================= REGISTERED DONORS (DYNAMIC) ================= -->
+  <section id="donors">
+    <h2>Registered Donors</h2>
+    <p><span id="donorCount" class="count-badge">0</span> donor(s) registered. New registrations appear here instantly.</p>
+
+    <div class="donor-tools">
+      <input type="search" id="donorSearch" placeholder="Search by name or blood group (e.g. O+)" aria-label="Search donors">
+      <button type="button" id="clearAll" class="btn-dark">Clear All</button>
+    </div>
+
+    <ul id="donorList" class="donor-list"></ul>
+    <p id="emptyMsg" class="empty">No donors registered yet. Fill in the form above to add the first one.</p>
+  </section>
+
+  <!-- ================= STAFF TASK MANAGER (CRUD + LOCAL STORAGE) ================= -->
+  <section id="tasks">
+    <h2>Blood Bank Task Manager</h2>
+    <p>Staff can plan and track daily blood-bank work. Tasks are saved in your browser
+       (Local Storage), so they are still here after you refresh the page.</p>
+
+    <!-- CREATE / UPDATE form -->
+    <form id="taskForm" class="task-form" autocomplete="off">
+      <h3 id="taskFormTitle">Add a New Task</h3>
+      <div class="task-grid">
+        <div class="field wide">
+          <label for="taskTitle">Task Title <span class="req">*</span></label>
+          <input type="text" id="taskTitle" placeholder="e.g. Call O− donors for urgent camp" required minlength="3" maxlength="80">
+        </div>
+
+        <div class="field">
+          <label for="taskCategory">Category</label>
+          <select id="taskCategory">
+            <option>Donor Follow-up</option>
+            <option>Blood Testing &amp; Screening</option>
+            <option>Stock &amp; Inventory</option>
+            <option>Camp Organisation</option>
+            <option>Delivery to Hospital</option>
+            <option>Administration</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="taskBlood">Blood Group (if relevant)</label>
+          <select id="taskBlood">
+            <option value="">Not applicable</option>
+            <option>A+</option><option>A−</option>
+            <option>B+</option><option>B−</option>
+            <option>AB+</option><option>AB−</option>
+            <option>O+</option><option>O−</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="taskPriority">Priority</label>
+          <select id="taskPriority">
+            <option>Low</option>
+            <option selected>Medium</option>
+            <option>High</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="taskDue">Due Date <span class="req">*</span></label>
+          <input type="date" id="taskDue" required>
+        </div>
+
+        <div class="field">
+          <label for="taskStatus">Status</label>
+          <select id="taskStatus">
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+          </select>
+        </div>
+
+        <div class="field wide">
+          <label for="taskNotes">Notes</label>
+          <textarea id="taskNotes" rows="3" maxlength="250" placeholder="Extra details (optional, max 250 characters)"></textarea>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button type="submit" id="taskSubmit">Add Task</button>
+        <button type="button" id="taskCancel" class="btn-dark" hidden>Cancel Edit</button>
+      </div>
+    </form>
+
+    <!-- READ: summary table + progress -->
+    <h3>Task Summary</h3>
+    <div class="table-wrap">
+      <table id="taskSummary">
+        <thead>
+          <tr>
+            <th scope="col">Status</th>
+            <th scope="col">Tasks</th>
+            <th scope="col">High Priority</th>
+            <th scope="col">Overdue</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="progress-label"><span id="taskProgressText">0% completed</span></p>
+    <div class="bar progress"><div id="taskProgress" class="fill high"></div></div>
+
+    <!-- READ: task list with search and filter -->
+    <h3>All Tasks</h3>
+    <div class="donor-tools">
+      <input type="search" id="taskSearch" placeholder="Search tasks…" aria-label="Search tasks">
+      <select id="taskFilter" aria-label="Filter by status">
+        <option value="all">All statuses</option>
+        <option>Pending</option>
+        <option>In Progress</option>
+        <option>Completed</option>
+      </select>
+      <button type="button" id="taskClearDone" class="btn-dark">Clear Completed</button>
+    </div>
+
+    <ul id="taskList" class="task-list"></ul>
+    <p id="taskEmpty" class="empty" hidden>No tasks to show.</p>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <address>
+      LifeFlow Blood Bank, 12 Hospital Road, Coimbatore, Tamil Nadu<br>
+      Phone: <a href="tel:+910000000000">+91 00000 00000</a><br>
+      Email: <a href="mailto:info@lifeflow.example">info@lifeflow.example</a>
+    </address>
+  </section>
+
+</main>
+
+<!-- Lightbox for the gallery -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button type="button" id="lbClose" class="lb-btn lb-close" aria-label="Close">&times;</button>
+  <button type="button" id="lbPrev" class="lb-btn lb-prev" aria-label="Previous picture">&lsaquo;</button>
+  <figure>
+    <img id="lbImg" alt="" width="400" height="400">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button type="button" id="lbNext" class="lb-btn lb-next" aria-label="Next picture">&rsaquo;</button>
+</div>
+
+<footer>
+  <p>&copy; 2026 LifeFlow Blood Bank. All rights reserved.</p>
+</footer>
+
+<a href="#home" class="back-to-top" aria-label="Back to top">&uarr;</a>
+
+<script src="script.js"></script>
+
+</body>
+</html>
